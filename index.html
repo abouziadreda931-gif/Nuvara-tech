@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectroLux - Boutique Électronique Premium</title>
+    
+    <!-- Balises méta pour le référencement et l'optimisation -->
+    <meta name="description" content="Découvrez des produits électroniques haut de gamme : écouteurs sans fil, montres connectées, chargeurs rapides GaN et accessoires de luxe chez ElectroLux.">
+    <meta name="keywords" content="électronique, écouteurs, montre connectée, airpods, chargeur, batterie externe, technologie, luxe">
+    
+    <!-- Feuilles de style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Conteneur d'alertes flottantes dynamiques (Toasts) -->
+    <div id="toast-container" style="position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 10px;"></div>
+
+    <!-- ==========================================================================
+       En-tête & Barre de Navigation
+       ========================================================================== -->
+    <header class="main-header glass">
+        <div class="container nav-container">
+            <!-- Bouton Hamburger Mobile -->
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Basculer le menu de navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <!-- Logo de la marque -->
+            <a href="#" class="logo-wrapper">
+                <span class="logo-icon">⚡</span>
+                <span>ElectroLux</span>
+            </a>
+
+            <!-- Liens de navigation -->
+            <nav class="nav-links" id="nav-links">
+                <a href="#hero-section" class="nav-link active">Accueil</a>
+                <a href="#shop-section" class="nav-link">Boutique</a>
+                <a href="#categories-section" class="nav-link">Catégories</a>
+                <a href="#reviews-section" class="nav-link">Avis</a>
+                <a href="#footer-section" class="nav-link">Contact</a>
+            </nav>
+
+            <!-- Actions de navigation -->
+            <div class="nav-actions">
+                <!-- Barre de recherche -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Rechercher un produit..." aria-label="Recherche">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Bouton Thème Sombre/Clair -->
+                <button class="nav-action-btn" id="theme-toggle-btn" aria-label="Changer de thème">
+                    <!-- Remplacé dynamiquement par script.js -->
+                </button>
+
+                <!-- Lien vers les Favoris -->
+                <button class="nav-action-btn" id="wishlist-nav-btn" aria-label="Voir les favoris">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                    </svg>
+                    <span class="badge-count" id="wishlist-badge" style="display: none;">0</span>
+                </button>
+
+                <!-- Bouton Panier Latéral -->
+                <button class="nav-action-btn" id="cart-toggle-btn" aria-label="Voir le panier">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/>
+                        <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+                    </svg>
+                    <span class="badge-count" id="cart-badge" style="display: none;">0</span>
+                </button>
+
+                <!-- Avatar Compte Utilisateur -->
+                <button class="nav-action-btn" aria-label="Compte Client" onclick="showToast('Espace client en cours de maintenance. Profil prêt.', 'info')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+       Bannière Principale Héro
+       ========================================================================== -->
+    <section class="hero-slider" id="hero-section">
+        <div class="slide-track">
+            <!-- Slide 1: Audio / AirPods -->
+            <div class="slide active">
+                <div class="slide-bg">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1600&auto=format&fit=crop&q=80" alt="Bannière Acoustique Premium">
+                </div>
+                <div class="container">
+                    <div class="slide-content">
+                        <span class="slide-tag">Son Réinventé</span>
+                        <h1 class="slide-title">Acoustique AirPods Max & Pro</h1>
+                        <p class="slide-description">Plongez au cœur d'une qualité sonore riche et profonde. Découvrez nos modèles haut de gamme à réduction active du bruit personnalisée.</p>
+                        <div class="slide-actions">
+                            <a href="#shop-section" class="btn btn-primary">Acheter Maintenant</a>
+                            <a href="#" class="btn btn-secondary" onclick="event.preventDefault(); openProductModal(2)">En savoir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Smartwatch -->
+            <div class="slide">
+                <div class="slide-bg">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600&auto=format&fit=crop&q=80" alt="Bannière Montre Connectée">
+                </div>
+                <div class="container">
+                    <div class="slide-content">
+                        <span class="slide-tag">Objets Connectés</span>
+                        <h1 class="slide-title">Apple Watch Ultra 2</h1>
+                        <p class="slide-description">Conçue pour l'aventure extrême. Boîtier robuste en titane, GPS double fréquence de précision et autonomie jusqu'à 36 heures.</p>
+                        <div class="slide-actions">
+                            <a href="#shop-section" class="btn btn-primary">Découvrir</a>
+                            <a href="#" class="btn btn-secondary" onclick="event.preventDefault(); openProductModal(7)">Spécifications</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Chargeurs & Alimentation -->
+            <div class="slide">
+                <div class="slide-bg">
+                    <img src="https://images.unsplash.com/photo-1605787020600-b9ebd5df1d07?w=1600&auto=format&fit=crop&q=80" alt="Bannière Accessoires de Charge">
+                </div>
+                <div class="container">
+                    <div class="slide-content">
+                        <span class="slide-tag">Technologie GaN</span>
+                        <h1 class="slide-title">Alimentation Intelligente</h1>
+                        <p class="slide-description">Profitez de chargeurs GaN ultra-rapides de 120W, de stations sans fil MagSafe et de batteries externes de haute capacité à suivi numérique.</p>
+                        <div class="slide-actions">
+                            <a href="#shop-section" class="btn btn-primary">Voir les accessoires</a>
+                            <a href="#" class="btn btn-secondary" onclick="event.preventDefault(); openProductModal(6)">Découvrir PowerCore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flèches de navigation du Carrousel -->
+        <div class="slider-nav">
+            <button class="slider-nav-btn" id="slider-prev" aria-label="Slide Précédent">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="m15 18-6-6 6-6"/>
+                </svg>
+            </button>
+            <button class="slider-nav-btn" id="slider-next" aria-label="Slide Suivant">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="m9 18 6-6-6-6"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Points indicateurs du Carrousel -->
+        <div class="slider-dots">
+            <!-- Insérés via script.js -->
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       Galerie Photos
+       ========================================================================== -->
+    <section class="section" id="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Mes Photos</h2>
+                <p class="section-subtitle">Vos visuels sont intégrés directement dans le site avec un rendu soigné et responsive.</p>
+            </div>
+
+            <div class="photo-gallery">
+                <article class="photo-card">
+                    <img src="airpods.jpg" alt="Produit AirPods intégré au site">
+                    <div class="photo-card-content">
+                        <h3>Photo produit</h3>
+                        <p>Cette image est maintenant visible dans une carte dédiée sur la page d’accueil.</p>
+                    </div>
+                </article>
+
+                <article class="photo-card">
+                    <img src="projct/les images/b_Luxury_social_media_.png" alt="Visuel premium ajouté au site">
+                    <div class="photo-card-content">
+                        <h3>Visuel premium</h3>
+                        <p>Votre image locale est affichée proprement avec un style moderne.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       Section Catégories
+       ========================================================================== -->
+    <section class="section" id="categories-section" style="background-color: var(--secondary-bg);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Acheter par Catégorie</h2>
+                <p class="section-subtitle">Découvrez notre gamme d'équipements technologiques et d'accessoires pensés pour votre quotidien.</p>
+            </div>
+            
+            <div class="category-grid" id="category-container">
+                <!-- Inséré dynamiquement par script.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       Boutique & Catalogue de Produits
+       ========================================================================== -->
+    <section class="section" id="shop-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Notre Catalogue</h2>
+                <p class="section-subtitle">Chaque produit est minutieusement conçu et testé pour allier performance, fiabilité et design.</p>
+            </div>
+
+            <!-- Barre de tris et de filtres -->
+            <div class="shop-bar">
+                <!-- Onglets de filtrage -->
+                <div class="shop-tabs">
+                    <button class="shop-tab active">Tous les produits</button>
+                    <button class="shop-tab">Vedettes</button>
+                    <button class="shop-tab">Meilleures Ventes</button>
+                    <button class="shop-tab">Nouveautés</button>
+                </div>
+
+                <!-- Tri par sélecteur -->
+                <div class="shop-sorting">
+                    <label for="sort-select">Trier par :</label>
+                    <select id="sort-select">
+                        <option value="featured">Choix de Vedettes</option>
+                        <option value="price-low-high">Prix : Du - cher au + cher</option>
+                        <option value="price-high-low">Prix : Du + cher au - cher</option>
+                        <option value="rating">Évaluation Moyenne</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Grille de Produits -->
+            <div class="products-grid" id="products-grid">
+                <!-- Les cartes produits seront chargées ici via script.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       Section Bannières Promotionnelles
+       ========================================================================== -->
+    <section class="section" style="background-color: var(--secondary-bg); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+        <div class="container">
+            <div class="promo-grid">
+                <!-- Bannière 1 : Audio de luxe (avec image locale b_Luxury_social_media_.png) -->
+                <div class="promo-banner">
+                    <div class="promo-bg">
+                        <img src="projct/les images/b_Luxury_social_media_.png" alt="Spotlight Audio Luxe">
+                    </div>
+                    <div class="promo-content">
+                        <span class="promo-tag">Design Exclusif</span>
+                        <h3 class="promo-title">L'Art de la Technologie de Luxe</h3>
+                        <p class="promo-description">Explorez nos éditions exclusives composées de matériaux nobles et de finitions haut de gamme pour parfaire votre espace.</p>
+                        <a href="#shop-section" class="btn btn-dark" onclick="event.preventDefault(); currentCategory = 'AirPods'; renderCategories(); filterAndSortProducts();">Découvrir l'Audio de Luxe</a>
+                    </div>
+                </div>
+
+                <!-- Bannière 2 : Docks et Chargeurs GaN (avec image locale Image 2.jpg) -->
+                <div class="promo-banner">
+                    <div class="promo-bg">
+                        <img src="les images/Image 2.jpg" alt="Chargeur rapide GaN en gros plan">
+                    </div>
+                    <div class="promo-content">
+                        <span class="promo-tag">Alimentation Ultime</span>
+                        <h3 class="promo-title">Écosystème de Charge GaN</h3>
+                        <p class="promo-description">Ne laissez plus jamais le niveau de batterie limiter votre productivité. Mettez à niveau votre bureau avec nos chargeurs 120W.</p>
+                        <a href="#shop-section" class="btn btn-dark" onclick="event.preventDefault(); currentCategory = 'Chargeurs'; renderCategories(); filterAndSortProducts();">Découvrir les Docks</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       Section Avis Clients (Témoignages)
+       ========================================================================== -->
+    <section class="section" id="reviews-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Avis de nos Clients</h2>
+                <p class="section-subtitle">Découvrez pourquoi nos clients font confiance à ElectroLux pour leurs équipements technologiques.</p>
+            </div>
+
+            <div class="reviews-carousel" id="reviews-carousel">
+                <!-- Avis 1 -->
+                <div class="review-card">
+                    <div class="review-stars stars">★★★★★</div>
+                    <p class="review-text">"Les AirPods Pro 2 sont exceptionnels. La réduction active du bruit est deux fois plus efficace que sur ma précédente paire, et la livraison a été extrêmement rapide."</p>
+                    <div class="review-user">
+                        <img class="user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Sarah J.">
+                        <div class="user-info">
+                            <h4>Sarah Jenkins</h4>
+                            <p>Acheteur Vérifié</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avis 2 -->
+                <div class="review-card">
+                    <div class="review-stars stars">★★★★★</div>
+                    <p class="review-text">"Le chargeur 120W Anker a remplacé tous mes autres blocs de charge à la maison. Je peux charger mon Macbook, iPhone et ma montre en même temps sans aucun problème."</p>
+                    <div class="review-user">
+                        <img class="user-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="David M.">
+                        <div class="user-info">
+                            <h4>David Miller</h4>
+                            <p>Acheteur Vérifié</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avis 3 -->
+                <div class="review-card">
+                    <div class="review-stars stars">★★★★★</div>
+                    <p class="review-text">"Le boîtier en titane de l'Apple Watch Ultra 2 est tout simplement superbe. L'écran reste lisible même sous le soleil de midi. Un investissement que je ne regrette pas."</p>
+                    <div class="review-user">
+                        <img class="user-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80" alt="Marcus K.">
+                        <div class="user-info">
+                            <h4>Marcus Kross</h4>
+                            <p>Acheteur Vérifié</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avis 4 -->
+                <div class="review-card">
+                    <div class="review-stars stars">★★★★★</div>
+                    <p class="review-text">"La Sonos Era 100 produit un son incroyable. Le streaming en Wi-Fi et Bluetooth fonctionne à la perfection. Elle s'intègre parfaitement à mon mobilier de salon."</p>
+                    <div class="review-user">
+                        <img class="user-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="Jessica L.">
+                        <div class="user-info">
+                            <h4>Jessica Loomis</h4>
+                            <p>Acheteur Vérifié</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       Section Lettre d'information (Newsletter)
+       ========================================================================== -->
+    <section class="section container" style="padding-bottom: 80px;">
+        <div class="newsletter-section">
+            <div class="newsletter-content">
+                <h2>Rejoindre le Club</h2>
+                <p>Abonnez-vous pour recevoir nos offres privées, nos nouveaux lancements et des conseils technologiques exclusifs directement dans votre boîte mail.</p>
+                
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" placeholder="Entrez votre adresse e-mail" required aria-label="Adresse e-mail">
+                    <button type="submit" class="btn btn-primary">S'abonner</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+       Panier d'achat coulissant latéral
+       ========================================================================== -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h2>Votre Panier d'Achat</h2>
+            <button class="close-cart-btn" id="close-cart-btn" aria-label="Fermer le panier">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 6 6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Conteneur d'articles de panier défilable -->
+        <div class="cart-items" id="cart-items">
+            <!-- Inséré via script.js -->
+        </div>
+
+        <!-- Totaux fixes et Commande -->
+        <div class="cart-footer">
+            <div class="cart-totals">
+                <div class="cart-total-row">
+                    <span>Sous-total</span>
+                    <span id="cart-subtotal">0,00 DH</span>
+                </div>
+                <div class="cart-total-row">
+                    <span>Frais de livraison</span>
+                    <span id="cart-shipping">0,00 DH</span>
+                </div>
+                <div class="cart-total-row grand-total">
+                    <span>Total</span>
+                    <span id="cart-total">0,00 DH</span>
+                </div>
+            </div>
+            
+            <button class="btn btn-primary checkout-btn" onclick="checkout()">
+                Commander
+            </button>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       Modal de caractéristiques et de détails (Quick View)
+       ========================================================================== -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-container" id="modal-container">
+            <button class="close-modal-btn" onclick="closeProductModal()" aria-label="Fermer la modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 6 6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            
+            <!-- Contenu dynamique inséré par script.js -->
+            <div class="modal-body" id="modal-container-body">
+                <!-- Rempli par script.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       Section Pied de Page (Footer)
+       ========================================================================== -->
+    <footer class="main-footer" id="footer-section">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Infos marque -->
+                <div class="footer-info-col">
+                    <h3>⚡ ElectroLux</h3>
+                    <p>Concepteur d'accessoires technologiques et d'appareils haut de gamme alliant sobriété, élégance et haute performance.</p>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Linkedin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Colonne produits -->
+                <div class="footer-col">
+                    <h4>Produits</h4>
+                    <ul>
+                        <li><a href="#shop-section" onclick="currentCategory = 'AirPods'; renderCategories(); filterAndSortProducts();">AirPods Max</a></li>
+                        <li><a href="#shop-section" onclick="currentCategory = 'Écouteurs'; renderCategories(); filterAndSortProducts();">Écouteurs sans fil</a></li>
+                        <li><a href="#shop-section" onclick="currentCategory = 'Chargeurs'; renderCategories(); filterAndSortProducts();">Chargeurs GaN</a></li>
+                        <li><a href="#shop-section" onclick="currentCategory = 'Montres Connectées'; renderCategories(); filterAndSortProducts();">Apple Watch Ultra</a></li>
+                        <li><a href="#shop-section" onclick="currentCategory = 'Enceintes'; renderCategories(); filterAndSortProducts();">Enceintes Sonos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne entreprise -->
+                <div class="footer-col">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="#" onclick="showToast('À propos : ElectroLux a été fondé en 2026 pour des designs de haute technologie.', 'info')">À propos de nous</a></li>
+                        <li><a href="#" onclick="showToast('Portail Recrutement : Tous les postes sont actuellement pourvus.', 'info')">Carrières</a></li>
+                        <li><a href="#" onclick="showToast('Presse : Découvrez nos actualités dans les médias.', 'info')">Espace Presse</a></li>
+                        <li><a href="#" onclick="showToast('Affiliation : Gagnez 5% de commission par parrainage.', 'info')">Affiliés</a></li>
+                        <li><a href="#" onclick="showToast('Cartes Cadeaux : Bons d\'achat bientôt disponibles.', 'info')">Cartes Cadeaux</a></li>
+                    </ul>
+                </div>
+
+                <!-- Colonne aide -->
+                <div class="footer-col">
+                    <h4>Assistance & Aide</h4>
+                    <ul>
+                        <li><a href="#" onclick="showToast('Livraison : Gratuite dans le monde entier dès 150 DH.', 'info')">Conditions de livraison</a></li>
+                        <li><a href="#" onclick="showToast('Retours : Garantie de remboursement de 30 jours.', 'info')">Retours & Remboursements</a></li>
+                        <li><a href="#" onclick="showToast('Manuels : Accédez aux guides de température des chargeurs.', 'info')">Manuels d\'utilisation</a></li>
+                        <li><a href="#" onclick="showToast('Assistance : contactez support@electrolux-shop.com', 'info')">Contacter le support client</a></li>
+                        <li><a href="#" onclick="showToast('Garantie : Garantie matérielle de 2 ans incluse.', 'info')">Détails de garantie</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Droits d'auteur et liens légaux -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 ElectroLux Inc. Tous droits réservés. Développé en HTML, CSS et JS purs.</p>
+                <div class="footer-legal-links">
+                    <a href="#" onclick="showToast('Données personnelles : Aucun traceur publicitaire n\'est stocké.', 'info')">Politique de confidentialité</a>
+                    <a href="#" onclick="showToast('Conditions : Toutes les transactions d\'achat sont chiffrées.', 'info')">Conditions d'utilisation</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
