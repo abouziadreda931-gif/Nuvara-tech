@@ -613,7 +613,9 @@ function getWhatsAppOrderLink(product) {
     const currentUrl = new URL(window.location.href);
     currentUrl.hash = '';
     currentUrl.searchParams.set('product', product.id);
-    const message = `Bonjour, je suis intéressé(e) par le produit : ${product.name} (${product.price} DH). Voici le lien : ${currentUrl.toString()}`;
+    const productPageUrl = currentUrl.toString();
+    const imageUrl = getAssetUrl(product.image);
+    const message = `Bonjour, je suis intéressé(e) par le produit : ${product.name} (${product.price} DH).\nLien du produit : ${productPageUrl}\nImage du produit : ${imageUrl}`;
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
@@ -622,7 +624,8 @@ function getAssetUrl(src) {
     if (/^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(src)) {
         return src;
     }
-    return encodeURI(src);
+    const encoded = encodeURI(src);
+    return new URL(encoded, window.location.href).href;
 }
 
 // Sélecteurs DOM
