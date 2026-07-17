@@ -486,6 +486,30 @@ const products = [
         isFeatured: true,
         isBestSeller: false,
         isNewArrival: true
+    },
+    {
+        id: 24,
+        name: "Pack Apple",
+        category: "offre",
+        price: 249,
+        originalPrice: 429,
+        rating: 4.9,
+        reviewCount: 125,
+        image: "apple1.png",
+        gallery: [
+            "apple1.png"
+        ],
+        description: "Découvrez notre Pack Apple exclusif réunissant l'essentiel : les AirPods Pro 2 pour un son immersif, accompagnés d'un adaptateur secteur 20W et d'un câble Apple Type-C vers Type-C pour une charge ultra-rapide de tous vos appareils. L'ensemble parfait à un prix imbattable.",
+        specs: {
+            "Contenu du Pack": "AirPods Pro 2, Adaptateur secteur 20W, Câble Apple Type-C vers Type-C",
+            "Audio": "AirPods Pro 2 avec réduction active du bruit et mode Transparence",
+            "Charge Rapide": "Adaptateur 20W garantissant une recharge rapide et sécurisée",
+            "Connectivité": "Câble Type-C robuste pour transfert et charge",
+            "Avantage": "Une offre complète et économique, tout-en-un"
+        },
+        isFeatured: true,
+        isBestSeller: true,
+        isNewArrival: true
     }
 ];
 
@@ -634,8 +658,8 @@ function renderCategories() {
     if (!categoryContainer) return;
     
     const rawCategories = products.map(p => p.category);
-    const uniqueCategories = [...new Set(['Tous', 'Casque', ...rawCategories])];
-    const desiredCategoryOrder = ['Tous', 'AirPods', 'Casque', 'casque', 'Chargeurs', 'Écouteurs', 'Batteries Externes', 'Montres Connectées', 'Ventilateurs'];
+    const uniqueCategories = [...new Set(['Tous', 'Casque', 'offre', ...rawCategories])];
+    const desiredCategoryOrder = ['Tous', 'offre', 'AirPods', 'Casque', 'casque', 'Chargeurs', 'Écouteurs', 'Batteries Externes', 'Montres Connectées', 'Ventilateurs'];
     const sortedCategories = desiredCategoryOrder.filter(cat => uniqueCategories.includes(cat)).concat(uniqueCategories.filter(cat => !desiredCategoryOrder.includes(cat) && cat !== 'Tous' && cat !== 'Accessoires Téléphone'));
     
     const categoryImageMap = rawCategories.reduce((map, category, index) => {
@@ -660,6 +684,7 @@ function renderCategories() {
     categoryImageMap['Ventilateurs'] = 'image copy 6.png';
     categoryImageMap['Montres Connectées'] = 'image.png';
     categoryImageMap['Casque'] = 'image copy 5.png';
+    categoryImageMap['offre'] = 'image copy 23.png';
     
     categoryContainer.innerHTML = sortedCategories.map(cat => {
         const label = categoryLabelMap[cat] || cat;
