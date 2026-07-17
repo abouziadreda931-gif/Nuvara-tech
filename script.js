@@ -495,9 +495,9 @@ const products = [
         originalPrice: 429,
         rating: 4.9,
         reviewCount: 125,
-        image: "apple1.png",
+        image: "apple1.PNG",
         gallery: [
-            "apple1.png"
+            "apple1.PNG"
         ],
         description: "Découvrez notre Pack Apple exclusif réunissant l'essentiel : les AirPods Pro 2 pour un son immersif, accompagnés d'un adaptateur secteur 20W et d'un câble Apple Type-C vers Type-C pour une charge ultra-rapide de tous vos appareils. L'ensemble parfait à un prix imbattable.",
         specs: {
